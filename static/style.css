@@ -1,0 +1,394 @@
+/* Material Design 3 Color System */
+:root[data-theme="light"] {
+    /* Primary colors */
+    --md-sys-color-primary: #6750A4;
+    --md-sys-color-on-primary: #FFFFFF;
+    --md-sys-color-primary-container: #EADDFF;
+    --md-sys-color-on-primary-container: #21005D;
+    
+    /* Secondary colors */
+    --md-sys-color-secondary: #625B71;
+    --md-sys-color-on-secondary: #FFFFFF;
+    --md-sys-color-secondary-container: #E8DEF8;
+    --md-sys-color-on-secondary-container: #1D192B;
+    
+    /* Surface colors */
+    --md-sys-color-surface: #FEF7FF;
+    --md-sys-color-on-surface: #1D1B20;
+    --md-sys-color-surface-variant: #E7E0EC;
+    --md-sys-color-on-surface-variant: #49454F;
+    
+    /* Background */
+    --md-sys-color-background: #FEF7FF;
+    --md-sys-color-on-background: #1D1B20;
+    
+    /* Outline */
+    --md-sys-color-outline: #79747E;
+    --md-sys-color-outline-variant: #CAC4D0;
+    
+    /* Error */
+    --md-sys-color-error: #B3261E;
+    --md-sys-color-on-error: #FFFFFF;
+    
+    /* Shadow and elevation */
+    --md-sys-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --md-sys-elevation-2: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --md-sys-elevation-3: 0px 1px 3px rgba(0, 0, 0, 0.3), 0px 4px 8px 3px rgba(0, 0, 0, 0.15);
+}
+
+:root[data-theme="dark"] {
+    /* Primary colors */
+    --md-sys-color-primary: #D0BCFF;
+    --md-sys-color-on-primary: #381E72;
+    --md-sys-color-primary-container: #4F378B;
+    --md-sys-color-on-primary-container: #EADDFF;
+    
+    /* Secondary colors */
+    --md-sys-color-secondary: #CCC2DC;
+    --md-sys-color-on-secondary: #332D41;
+    --md-sys-color-secondary-container: #4A4458;
+    --md-sys-color-on-secondary-container: #E8DEF8;
+    
+    /* Surface colors */
+    --md-sys-color-surface: #141218;
+    --md-sys-color-on-surface: #E6E0E9;
+    --md-sys-color-surface-variant: #49454F;
+    --md-sys-color-on-surface-variant: #CAC4D0;
+    
+    /* Background */
+    --md-sys-color-background: #141218;
+    --md-sys-color-on-background: #E6E0E9;
+    
+    /* Outline */
+    --md-sys-color-outline: #938F99;
+    --md-sys-color-outline-variant: #49454F;
+    
+    /* Error */
+    --md-sys-color-error: #F2B8B5;
+    --md-sys-color-on-error: #601410;
+    
+    /* Shadow and elevation */
+    --md-sys-elevation-1: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 1px 3px 1px rgba(0, 0, 0, 0.3);
+    --md-sys-elevation-2: 0px 1px 2px rgba(0, 0, 0, 0.5), 0px 2px 6px 2px rgba(0, 0, 0, 0.3);
+    --md-sys-elevation-3: 0px 1px 3px rgba(0, 0, 0, 0.5), 0px 4px 8px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Typography - Material Design 3 */
+:root {
+    --md-sys-typescale-display-large: 400 57px/64px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-headline-large: 400 32px/40px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-headline-medium: 400 28px/36px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-title-large: 400 22px/28px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-title-medium: 500 16px/24px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-body-large: 400 16px/24px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-body-medium: 400 14px/20px 'Roboto', system-ui, sans-serif;
+    --md-sys-typescale-label-large: 500 14px/20px 'Roboto', system-ui, sans-serif;
+}
+
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: var(--md-sys-typescale-body-large);
+    background-color: var(--md-sys-color-background);
+    color: var(--md-sys-color-on-background);
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* Header */
+.app-header {
+    background-color: var(--md-sys-color-surface);
+    border-bottom: 1px solid var(--md-sys-color-outline-variant);
+    padding: 16px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: var(--md-sys-elevation-2);
+}
+
+.app-header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.app-title {
+    font: var(--md-sys-typescale-headline-medium);
+    color: var(--md-sys-color-on-surface);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.material-icon {
+    font-size: 1.5em;
+}
+
+/* Theme toggle button */
+.icon-button {
+    background: transparent;
+    border: 1px solid var(--md-sys-color-outline);
+    width: 48px;
+    height: 48px;
+    border-radius: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 20px;
+}
+
+.icon-button:hover {
+    background-color: var(--md-sys-color-primary-container);
+}
+
+.icon-button:active {
+    transform: scale(0.95);
+}
+
+[data-theme="light"] .icon-dark,
+[data-theme="dark"] .icon-light {
+    display: none;
+}
+
+/* Main content */
+.main-content {
+    min-height: calc(100vh - 200px);
+    padding: 32px 0;
+}
+
+/* Gallery intro */
+.gallery-intro {
+    margin-bottom: 48px;
+}
+
+.gallery-intro h2 {
+    font: var(--md-sys-typescale-headline-large);
+    color: var(--md-sys-color-on-background);
+    margin-bottom: 16px;
+}
+
+.gallery-intro p {
+    font: var(--md-sys-typescale-body-large);
+    color: var(--md-sys-color-on-surface-variant);
+    max-width: 800px;
+}
+
+/* Components grid */
+.components-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 24px;
+}
+
+/* Component card */
+.component-card {
+    background-color: var(--md-sys-color-surface);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.component-card:hover {
+    box-shadow: var(--md-sys-elevation-2);
+    transform: translateY(-2px);
+}
+
+.component-card-content {
+    padding: 24px;
+}
+
+.component-title {
+    font: var(--md-sys-typescale-title-large);
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 12px;
+}
+
+.component-description {
+    font: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.component-meta {
+    display: flex;
+    gap: 8px;
+}
+
+.component-version {
+    font: var(--md-sys-typescale-label-large);
+    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
+    padding: 4px 12px;
+    border-radius: 8px;
+}
+
+.component-card-actions {
+    padding: 16px 24px;
+    background-color: var(--md-sys-color-surface-variant);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+}
+
+/* Buttons */
+.button-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 24px;
+    background-color: var(--md-sys-color-primary);
+    color: var(--md-sys-color-on-primary);
+    border: none;
+    border-radius: 20px;
+    font: var(--md-sys-typescale-label-large);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: var(--md-sys-elevation-1);
+}
+
+.button-primary:hover {
+    box-shadow: var(--md-sys-elevation-2);
+    background-color: var(--md-sys-color-primary-container);
+    color: var(--md-sys-color-on-primary-container);
+}
+
+.button-primary:active {
+    transform: scale(0.98);
+}
+
+/* Empty state */
+.empty-state {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 64px 24px;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+/* Component detail page */
+.component-detail {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.component-header {
+    margin-bottom: 48px;
+}
+
+.breadcrumb {
+    font: var(--md-sys-typescale-body-medium);
+    color: var(--md-sys-color-on-surface-variant);
+    margin-bottom: 16px;
+}
+
+.breadcrumb a {
+    color: var(--md-sys-color-primary);
+    text-decoration: none;
+}
+
+.breadcrumb a:hover {
+    text-decoration: underline;
+}
+
+.separator {
+    margin: 0 8px;
+}
+
+.component-header h2 {
+    font: var(--md-sys-typescale-headline-large);
+    color: var(--md-sys-color-on-background);
+    margin-bottom: 12px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: var(--md-sys-color-secondary-container);
+    color: var(--md-sys-color-on-secondary-container);
+    border-radius: 12px;
+    font: var(--md-sys-typescale-label-large);
+    margin-top: 12px;
+}
+
+/* Demo section */
+.demo-section,
+.usage-section,
+.embed-section {
+    margin-bottom: 48px;
+}
+
+.demo-section h3,
+.usage-section h3,
+.embed-section h3 {
+    font: var(--md-sys-typescale-title-large);
+    color: var(--md-sys-color-on-surface);
+    margin-bottom: 16px;
+}
+
+.demo-container {
+    background-color: var(--md-sys-color-surface);
+    border: 1px solid var(--md-sys-color-outline-variant);
+    border-radius: 12px;
+    padding: 32px;
+    box-shadow: var(--md-sys-elevation-1);
+}
+
+/* Code blocks */
+.code-block {
+    background-color: var(--md-sys-color-surface-variant);
+    border-radius: 8px;
+    padding: 16px;
+    overflow-x: auto;
+    margin-top: 12px;
+}
+
+.code-block pre {
+    margin: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--md-sys-color-on-surface-variant);
+}
+
+.code-block code {
+    font-family: inherit;
+}
+
+/* Footer */
+.app-footer {
+    background-color: var(--md-sys-color-surface);
+    border-top: 1px solid var(--md-sys-color-outline-variant);
+    padding: 24px 0;
+    margin-top: 64px;
+    text-align: center;
+    color: var(--md-sys-color-on-surface-variant);
+    font: var(--md-sys-typescale-body-medium);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .components-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .container {
+        padding: 0 16px;
+    }
+    
+    .app-title {
+        font-size: 20px;
+    }
+}

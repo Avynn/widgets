@@ -1,0 +1,8 @@
+{
+    "name": "Gaussian KDE Visualizer",
+    "description": "Interactive visualization of Gaussian Kernel Density Estimation with Material Design 3 styling. Shows how KDE is built sample by sample with smooth animations.",
+    "version": "2.0.0",
+    "author": "Web Components Gallery",
+    "tags": ["visualization", "statistics", "animation", "kde"],
+    "supportsThemes": true
+}

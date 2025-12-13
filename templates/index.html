@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gallery-intro">
+    <h2>Component Library</h2>
+    <p>A collection of reusable web components with Material Design 3 styling. Each component supports both light and dark modes and can be easily embedded in blog posts.</p>
+</div>
+
+<div class="components-grid">
+    {% for component in components %}
+    <div class="component-card">
+        <div class="component-card-content">
+            <h3 class="component-title">{{ component.name }}</h3>
+            <p class="component-description">{{ component.description }}</p>
+            <div class="component-meta">
+                <span class="component-version">v{{ component.version }}</span>
+            </div>
+        </div>
+        <div class="component-card-actions">
+            <a href="{{ url_for('component_detail', component_id=component.id) }}" class="button-primary">
+                View Demo
+            </a>
+        </div>
+    </div>
+    {% else %}
+    <div class="empty-state">
+        <p>No components found. Add components to subdirectories to get started.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+
+{% block title %}{{ component.name }} - Web Components Gallery{% endblock %}
+
+{% block extra_head %}
+<script src="{{ url_for('serve_component_file', filepath=component.id + '/' + component.id.replace('_', '-') + '.js') }}" defer></script>
+{% endblock %}
+
+{% block content %}
+<div class="component-detail">
+    <div class="component-header">
+        <div class="breadcrumb">
+            <a href="{{ url_for('index') }}">Gallery</a>
+            <span class="separator">/</span>
+            <span>{{ component.name }}</span>
+        </div>
+        <h2>{{ component.name }}</h2>
+        <p class="component-description">{{ component.description }}</p>
+        <div class="component-meta">
+            <span class="badge">v{{ component.version }}</span>
+        </div>
+    </div>
+
+    <div class="demo-section">
+        <h3>Live Demo</h3>
+        <div class="demo-container">
+            <!-- Component will be rendered here via custom element -->
+            <div id="component-mount"></div>
+        </div>
+    </div>
+
+    <div class="usage-section">
+        <h3>Usage</h3>
+        <div class="code-block">
+            <pre><code>&lt;!-- Include the component script --&gt;
+&lt;script src="{{ component.id.replace('_', '-') }}.js"&gt;&lt;/script&gt;
+
+&lt;!-- Use the component --&gt;
+&lt;{{ component.id.replace('_', '-') }}&gt;&lt;/{{ component.id.replace('_', '-') }}&gt;</code></pre>
+        </div>
+    </div>
+
+    <div class="embed-section">
+        <h3>Embed in Blog</h3>
+        <p>Copy this code to embed in a blog post:</p>
+        <div class="code-block">
+            <pre><code>&lt;script src="{{ url_for('serve_component_file', filepath=component.id + '/' + component.id.replace('_', '-') + '.js', _external=True) }}"&gt;&lt;/script&gt;
+&lt;{{ component.id.replace('_', '-') }}&gt;&lt;/{{ component.id.replace('_', '-') }}&gt;</code></pre>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script>
+    // Initialize component demo
+    document.addEventListener('DOMContentLoaded', () => {
+        const mount = document.getElementById('component-mount');
+        const componentTag = '{{ component.id.replace("_", "-") }}';
+        const element = document.createElement(componentTag);
+        
+        // Add any default attributes based on component type
+        {% if component.id == 'gaussian_kde_visualizer' %}
+        element.setAttribute('autoplay', 'true');
+        {% endif %}
+        
+        mount.appendChild(element);
+    });
+</script>
+{% endblock %}
