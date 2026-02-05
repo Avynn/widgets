@@ -23,56 +23,25 @@ class RelationBuilder:
         self.edges = []
     
     def add_temporal_relation(self, text: str, node1: str, node2: str) -> Edge:
-        """
-        Add a temporal relation based on discourse marker.
-        
-        Handles correct edge direction:
-        - "X before Y" -> edge from X to Y
-        - "X after Y" -> edge from Y to X
-        
-        Args:
-            text: The full text containing the relation
-            node1: First node mentioned
-            node2: Second node mentioned
-            
-        Returns:
-            The created edge
-        """
+        """Add temporal relation with correct direction for before/after."""
         text_lower = text.lower()
         
         if "before" in text_lower:
-            # "X before Y" means X happens first, so edge X -> Y
-            edge = create_temporal_edge(node1, node2)
+            edge = create_temporal_edge(node1, node2)  # X before Y -> X -> Y
         elif "after" in text_lower:
-            # "X after Y" means Y happens first, so edge Y -> X
-            edge = create_temporal_edge(node2, node1)
+            edge = create_temporal_edge(node2, node1)  # X after Y -> Y -> X
         else:
-            # Default to before semantics
             edge = create_temporal_edge(node1, node2)
         
         self.edges.append(edge)
         return edge
     
     def detect_discourse_marker(self, text: str) -> Tuple[str, EdgeType]:
-        """
-        Detect discourse markers in text, including multi-word markers.
-        
-        Multi-word markers are checked first for proper matching.
-        
-        Args:
-            text: Text to analyze
-            
-        Returns:
-            Tuple of (marker found, edge type) or (None, None)
-        """
+        """Detect discourse markers in text, checking multi-word markers first."""
         text_lower = text.lower()
         
-        # Check multi-word markers first (longest to shortest)
-        multi_word_markers = [
-            "even though", "in spite of", "as well as", "in order to"
-        ]
-        
-        for marker in multi_word_markers:
+        # Check multi-word markers first
+        for marker in ["even though", "in spite of", "as well as", "in order to"]:
             if marker in text_lower:
                 return (marker, DISCOURSE_MARKERS[marker])
         
@@ -84,17 +53,7 @@ class RelationBuilder:
         return (None, None)
     
     def build_relation(self, text: str, node1: str, node2: str) -> Edge:
-        """
-        Build a semantic relation from text.
-        
-        Args:
-            text: Text containing the relation
-            node1: First node
-            node2: Second node
-            
-        Returns:
-            Created edge
-        """
+        """Build a semantic relation from text."""
         marker, edge_type = self.detect_discourse_marker(text)
         
         if edge_type == EdgeType.TEMPORAL:
@@ -104,7 +63,6 @@ class RelationBuilder:
             self.edges.append(edge)
             return edge
         else:
-            # Default relation
             edge = Edge(node1, node2, EdgeType.ELABORATION)
             self.edges.append(edge)
             return edge
@@ -112,3 +70,4 @@ class RelationBuilder:
     def get_edges(self) -> List[Edge]:
         """Get all built edges."""
         return self.edges
+
