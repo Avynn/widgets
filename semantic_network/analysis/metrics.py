@@ -1,7 +1,7 @@
 """Dialectical metrics computation for semantic network analysis."""
 
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Any, Dict, List, Tuple
 from collections import defaultdict
 
 
@@ -15,7 +15,7 @@ class DialecticalMetrics:
         total_nodes: Total number of nodes analyzed
         role_counts: Count of nodes per dialectical role
     """
-    transition_matrix: Dict[tuple, int] = field(default_factory=dict)
+    transition_matrix: Dict[Tuple[str, str], int] = field(default_factory=dict)
     density_per_sentence: List[float] = field(default_factory=list)
     total_nodes: int = 0
     role_counts: Dict[str, int] = field(default_factory=dict)
@@ -24,7 +24,7 @@ class DialecticalMetrics:
 class MetricsCalculator:
     """Calculator for computing dialectical analysis metrics."""
     
-    def calculate(self, nodes: List[Dict[str, any]]) -> DialecticalMetrics:
+    def calculate(self, nodes: List[Dict[str, Any]]) -> DialecticalMetrics:
         """Calculate dialectical metrics from nodes with assigned roles.
         
         Args:
@@ -56,14 +56,14 @@ class MetricsCalculator:
         
         return metrics
     
-    def _calculate_role_counts(self, nodes: List[Dict[str, any]]) -> Dict[str, int]:
+    def _calculate_role_counts(self, nodes: List[Dict[str, Any]]) -> Dict[str, int]:
         """Count occurrences of each dialectical role."""
         role_counts = defaultdict(int)
         for node in nodes:
             role_counts[node['role']] += 1
         return dict(role_counts)
     
-    def _calculate_transition_matrix(self, nodes: List[Dict[str, any]]) -> Dict[tuple, int]:
+    def _calculate_transition_matrix(self, nodes: List[Dict[str, Any]]) -> Dict[Tuple[str, str], int]:
         """Calculate transition matrix tracking role-to-role transitions in text order."""
         transition_matrix = defaultdict(int)
         for i in range(len(nodes) - 1):
@@ -72,7 +72,7 @@ class MetricsCalculator:
             transition_matrix[(from_role, to_role)] += 1
         return dict(transition_matrix)
     
-    def _calculate_density_per_sentence(self, nodes: List[Dict[str, any]]) -> List[float]:
+    def _calculate_density_per_sentence(self, nodes: List[Dict[str, Any]]) -> List[float]:
         """Calculate density metric per sentence (proportion of non-OTHER roles)."""
         # Group nodes by sentence
         sentences = defaultdict(list)
