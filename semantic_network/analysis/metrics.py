@@ -1,7 +1,7 @@
 """Dialectical analysis metrics computation."""
 
 from dataclasses import dataclass, field
-from typing import Dict, List
+from typing import Dict, List, Tuple
 from collections import defaultdict
 
 
@@ -16,7 +16,7 @@ class DialecticalMetrics:
         role_counts: Count of nodes for each role type.
         average_density: Average density across all sentences.
     """
-    transition_matrix: Dict[tuple, int] = field(default_factory=dict)
+    transition_matrix: Dict[Tuple[str, str], int] = field(default_factory=dict)
     density_per_sentence: List[float] = field(default_factory=list)
     total_nodes: int = 0
     role_counts: Dict[str, int] = field(default_factory=dict)
@@ -56,7 +56,7 @@ class MetricsCalculator:
             role_counts[node.get('role', 'OTHER')] += 1
         return dict(role_counts)
     
-    def _calculate_transitions(self, nodes: List[Dict]) -> Dict[tuple, int]:
+    def _calculate_transitions(self, nodes: List[Dict]) -> Dict[Tuple[str, str], int]:
         """Calculate role-to-role transitions in text order."""
         transitions = defaultdict(int)
         for i in range(len(nodes) - 1):
@@ -74,9 +74,6 @@ class MetricsCalculator:
         densities = []
         for sentence_id in sorted(sentences.keys()):
             sentence_nodes = sentences[sentence_id]
-            if not sentence_nodes:
-                densities.append(0.0)
-                continue
             non_other_count = sum(1 for node in sentence_nodes 
                                  if node.get('role', 'OTHER') != 'OTHER')
             densities.append(non_other_count / len(sentence_nodes))
