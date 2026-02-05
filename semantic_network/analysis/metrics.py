@@ -146,9 +146,6 @@ class MetricsCalculator:
         density = {}
         for sentence_idx, sentence_nodes in sentences.items():
             total_nodes = len(sentence_nodes)
-            if total_nodes == 0:
-                density[sentence_idx] = 0.0
-                continue
             
             assigned_nodes = sum(
                 1 for node in sentence_nodes
